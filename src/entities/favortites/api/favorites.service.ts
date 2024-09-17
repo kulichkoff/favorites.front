@@ -4,6 +4,8 @@ import { Store } from '@ngxs/store';
 
 import { FavoritesState } from '../model';
 
+const BASE_URL = 'http://localhost:3000/';
+
 @Injectable({ providedIn: 'root' })
 export class FavoritesApiServive {
   constructor(
@@ -14,10 +16,10 @@ export class FavoritesApiServive {
   public createFavoritesShareLink() {
     const favorites = this.store.selectSnapshot(FavoritesState.getFavorites);
 
-    return this.httpClient.post('/api/favorites/share', { favorites });
+    return this.httpClient.post(`${BASE_URL}/favorites/share`, { favorites });
   }
 
   public getFavoritesSet(setId: string) {
-    return this.httpClient.get('/api/favorites/share/' + setId);
+    return this.httpClient.get(`${BASE_URL}/favorites/share/${setId}`);
   }
 }
