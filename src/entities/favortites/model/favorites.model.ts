@@ -1,0 +1,1 @@
+export type FavoritesStateModel = string[];
