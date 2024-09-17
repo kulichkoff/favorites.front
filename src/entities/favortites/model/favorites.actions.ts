@@ -5,4 +5,8 @@ export namespace FavoritesActions {
 
     constructor(public content: string) {}
   }
+
+  export class ClearFavorites {
+    static readonly type = `${PREFIX} Clear favorites`;
+  }
 }

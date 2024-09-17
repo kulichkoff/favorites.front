@@ -1,13 +1,13 @@
 <router-outlet />
 
 <div class="content">
-  <button
-    mat-mini-fab
-    aria-label="Example icon button with a menu icon"
-    (click)="share()"
-  >
-    <mat-icon>share</mat-icon>
-  </button>
+  <div class="row gap-18">
+    <button mat-mini-fab aria-label="Example icon button with a menu icon" (click)="share()">
+      <mat-icon>share</mat-icon>
+    </button>
+
+    <button mat-raised-button (click)="clearList()">Clear list</button>
+  </div>
 
   <div class="row gap-18">
     <mat-form-field class="example-form-field">

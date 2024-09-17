@@ -23,4 +23,9 @@ export class FavoritesState {
     const state = ctx.getState();
     ctx.setState([...state, action.content]);
   }
+
+  @Action(FavoritesActions.ClearFavorites)
+  public clearFavorites(ctx: StateContext<FavoritesStateModel>) {
+    ctx.setState([]);
+  }
 }

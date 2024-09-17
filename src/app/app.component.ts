@@ -83,4 +83,8 @@ export class AppComponent implements OnInit {
   public share() {
     this.dialog.open(DialogComponent);
   }
+
+  public clearList() {
+    this.store.dispatch(new FavoritesActions.ClearFavorites());
+  }
 }
