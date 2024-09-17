@@ -6,10 +6,12 @@ import { provideStore } from '@ngxs/store';
 
 import { routes } from './app.routes';
 import { FavoritesState } from '@/entities/favortites';
+import { provideHttpClient } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
+    provideHttpClient(),
     provideRouter(routes),
     provideAnimationsAsync(),
     provideStore([FavoritesState], withNgxsStoragePlugin({ keys: '*' })),

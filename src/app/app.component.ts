@@ -12,6 +12,7 @@ import {
   FavoritesStateModel,
   FavoritesState,
   FavoritesActions,
+  FavoritesApiServive,
 } from '@/entities/favortites';
 
 @Component({
@@ -34,7 +35,10 @@ export class AppComponent {
 
   public newFavoriteContent?: string;
 
-  constructor(private readonly store: Store) {
+  constructor(
+    private readonly store: Store,
+    private readonly favoritesApi: FavoritesApiServive
+  ) {
     this.favorites = this.store.selectSignal(FavoritesState.getFavorites);
   }
 
@@ -48,5 +52,9 @@ export class AppComponent {
     );
 
     this.newFavoriteContent = '';
+  }
+
+  public share() {
+    this.favoritesApi.createFavoritesShareLink().subscribe();
   }
 }
