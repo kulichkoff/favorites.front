@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Store } from '@ngxs/store';
 
 import { FavoritesState } from '../model';
+import { Observable } from 'rxjs';
 
 const BASE_URL = 'http://localhost:3000/';
 
@@ -19,7 +20,7 @@ export class FavoritesApiServive {
     return this.httpClient.post(`${BASE_URL}favorites/share`, { favorites });
   }
 
-  public getFavoritesSet(setId: string) {
-    return this.httpClient.get(`${BASE_URL}favorites/share/${setId}`);
+  public getFavoritesSet(setId: string): Observable<{ favorites: string[] }> {
+    return this.httpClient.get<{ favorites: string[] }>(`${BASE_URL}favorites/share/${setId}`);
   }
 }

@@ -1,5 +1,5 @@
-import { Component, Signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, OnInit, signal, Signal } from '@angular/core';
+import { ActivatedRoute, RouterOutlet } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
@@ -14,6 +14,7 @@ import {
   FavoritesActions,
   FavoritesApiServive,
 } from '@/entities/favortites';
+import { catchError, EMPTY, filter, map, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -30,16 +31,37 @@ import {
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   public favorites: Signal<FavoritesStateModel>;
 
   public newFavoriteContent?: string;
 
   constructor(
     private readonly store: Store,
-    private readonly favoritesApi: FavoritesApiServive
+    private readonly favoritesApi: FavoritesApiServive,
+    private readonly route: ActivatedRoute
   ) {
     this.favorites = this.store.selectSignal(FavoritesState.getFavorites);
+  }
+
+  public ngOnInit(): void {
+    this.route.queryParams
+      .pipe(
+        map((params) => params['setId'] as string),
+        filter((setId) => !!setId),
+        switchMap((setId) => this.favoritesApi.getFavoritesSet(setId)),
+        catchError((err) => {
+          alert('Not found');
+          return EMPTY;
+        })
+      )
+      .subscribe((favoritesSet) => {
+        /**
+         * Если переопределить сигнал this.favorites, то мы не сломаем те фавориты, что хранятся в сторе
+         */
+
+        this.favorites = signal<FavoritesStateModel>(favoritesSet.favorites);
+      });
   }
 
   public addFavoriteItem() {
