@@ -15,6 +15,8 @@ import {
   FavoritesApiServive,
 } from '@/entities/favortites';
 import { catchError, EMPTY, filter, map, switchMap } from 'rxjs';
+import { DialogComponent } from '@/widgets/dialog';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-root',
@@ -27,6 +29,7 @@ import { catchError, EMPTY, filter, map, switchMap } from 'rxjs';
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
+    MatDialogModule,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
@@ -39,7 +42,8 @@ export class AppComponent implements OnInit {
   constructor(
     private readonly store: Store,
     private readonly favoritesApi: FavoritesApiServive,
-    private readonly route: ActivatedRoute
+    private readonly route: ActivatedRoute,
+    private readonly dialog: MatDialog
   ) {
     this.favorites = this.store.selectSignal(FavoritesState.getFavorites);
   }
@@ -77,6 +81,6 @@ export class AppComponent implements OnInit {
   }
 
   public share() {
-    this.favoritesApi.createFavoritesShareLink().subscribe();
+    this.dialog.open(DialogComponent);
   }
 }
