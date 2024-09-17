@@ -1,1 +1,17 @@
 <router-outlet />
+
+<div class="content">
+  <button mat-mini-fab aria-label="Example icon button with a menu icon">
+    <mat-icon>share</mat-icon>
+  </button>
+
+  <mat-list>
+    @if (favorites().length > 0) {
+      @for (item of favorites(); track $index) {
+        <mat-list-item>{{ item }}</mat-list-item>
+      }
+    } @else {
+      <mat-list-item>There is no favorites for now</mat-list-item>
+    }
+  </mat-list>
+</div>
