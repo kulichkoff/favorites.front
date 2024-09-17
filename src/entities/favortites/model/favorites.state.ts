@@ -11,7 +11,7 @@ import { FavoritesActions } from './favorites.actions';
 @Injectable({ providedIn: 'root' })
 export class FavoritesState {
   @Selector()
-  public getFavorites(state: FavoritesStateModel): string[] {
+  public static getFavorites(state: FavoritesStateModel): string[] {
     return state;
   }
 

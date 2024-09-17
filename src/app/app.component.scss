@@ -3,4 +3,22 @@
   max-width: 800px;
   padding: 48px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.example-form-field {
+  margin: 32px 0;
+  width: 300px;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.gap-18 {
+  display: flex;
+  gap: 18px;
 }
