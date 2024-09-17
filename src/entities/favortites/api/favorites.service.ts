@@ -18,6 +18,6 @@ export class FavoritesApiServive {
   }
 
   public getFavoritesSet(setId: string) {
-    return this.httpClient.get('/api/favorites/' + setId);
+    return this.httpClient.get('/api/favorites/share/' + setId);
   }
 }
