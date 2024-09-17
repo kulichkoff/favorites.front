@@ -1,12 +1,16 @@
 <h2 mat-dialog-title>Share the link below with your friends!</h2>
 <mat-dialog-content>
-  <mat-form-field>
-    <mat-label>Share link</mat-label>
-    <input disabled matInput [(ngModel)]="shareLink" />
-  </mat-form-field>
+  @if (!loading) {
+    <mat-form-field class="share-link">
+      <mat-label>Share link</mat-label>
+      <input disabled matInput [(ngModel)]="shareLink" />
+    </mat-form-field>
+  } @else {
+    <mat-spinner [diameter]="48" class="spinner" />
+  }
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-button (click)="copy()" [disabled]="isCopyDosabled">
+  <button mat-button (click)="copy()" [disabled]="isCopyDosabled || loading">
     {{ isCopyDosabled ? "Copied" : "Copy" }}
   </button>
   <button mat-button mat-dialog-close cdkFocusInitial>Ok</button>

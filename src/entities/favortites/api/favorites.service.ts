@@ -17,10 +17,14 @@ export class FavoritesApiServive {
   public createFavoritesShareLink() {
     const favorites = this.store.selectSnapshot(FavoritesState.getFavorites);
 
-    return this.httpClient.post(`${BASE_URL}favorites/share`, { favorites });
+    return this.httpClient.post<{ id: string }>(`${BASE_URL}favorites/share`, {
+      favorites,
+    });
   }
 
   public getFavoritesSet(setId: string): Observable<{ favorites: string[] }> {
-    return this.httpClient.get<{ favorites: string[] }>(`${BASE_URL}favorites/share/${setId}`);
+    return this.httpClient.get<{ favorites: string[] }>(
+      `${BASE_URL}favorites/share/${setId}`
+    );
   }
 }
